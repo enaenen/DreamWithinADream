@@ -24,7 +24,7 @@ RUN openssl req -x509 \
                             -keyout /etc/nginx/ssl/localhost.wchae.key \
                             -out /etc/nginx/ssl/localhost.wchae.crt
 
-# RUN chmod +x /tmp/run_nginx.sh
-# ENTRYPOINT ["sh", "/tmp/run_nginx.sh"]
+RUN chmod +x /tmp/run_nginx.sh
+ENTRYPOINT ["sh", "/tmp/run_nginx.sh"]
 
 EXPOSE 443
