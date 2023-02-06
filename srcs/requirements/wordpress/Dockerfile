@@ -3,8 +3,8 @@ FROM alpine:3.16
 EXPOSE 9000
 # need to mysql is connectable check
 # HEALTHCHECK --interval=1s --timeout=2s --start-period=30s --retries=30 \
-#             CMD [ "nc", "-z", "localhost", "9000" ]
-            
+# CMD [ "nc", "-z", "localhost", "9000" ]
+
 
 RUN apk update && apk upgrade \
     && apk add bash \

@@ -1,0 +1,66 @@
+version: "3"
+
+services: # 이 항목 밑에 실행하려는 컨테이너들 정의
+
+  mariadb: # 서비스의 이름
+    container_name: db
+    env_file: .env
+    build:
+      context: requirements/mariadb
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=$$MYSQL_ROOT_PASSWORD"]
+      interval: 1s
+      timeout: 2s
+      retries: 20
+      start_period: 7s
+    restart: always
+    volumes:
+      -db_volume:/var/lib/mysql
+    networks:
+      - inception-network
+
+  wordpress:
+    container_name: wordpress
+    env_file: .env
+    build:
+      context: requirements/wordpress
+    volumes:
+     - www-v:/var/www
+    networks:
+      - inception-network
+    depends_on:
+      - db       
+
+  nginx:
+    container_name: nginx
+    env_file: .env
+    build:
+      context: requirements/nginx
+    networks:
+      - network-inception
+    volumes:
+      - www-v:/var/www
+    depends_on:
+      - wordpress
+    ports:
+      - 443:443
+
+networks:
+  inception-network:
+    name: inception-network
+    driver: bridge
+
+volumes:
+  db_volume:
+    driver: local
+    driver_opts:
+      device: ${INCEPTION_PATH}/data/db
+      type: 'none'
+      o: 'bind'
+
+  wordpress_volume:
+    driver: local
+    driver_opts:
+      device: ${INCEPTION_PATH}/wordpress
+      type: 'none'
+      o: 'bind'
