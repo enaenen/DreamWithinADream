@@ -1,6 +1,5 @@
 FROM alpine:3.16
 
-ENV CERTS_=/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=wchae
 # copy files from host
 COPY ./tools/entry.sh /tmp/run_nginx.sh
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
@@ -13,16 +12,16 @@ RUN mkdir -p /var/www/
 RUN apk update \
     && apk upgrade \
     && apk add --no-cache \
-        nginx \
-        openssl
+    nginx \
+    openssl
 # SSL settings
 RUN openssl req -x509 \
-                            -newkey rsa:2048 \
-                            -days 365 \
-                            -nodes \
-                            -subj ${CERTS_} \
-                            -keyout /etc/nginx/ssl/localhost.wchae.key \
-                            -out /etc/nginx/ssl/localhost.wchae.crt
+    -newkey rsa:2048 \
+    -days 365 \
+    -nodes \
+    -subj ${CERTS_} \
+    -keyout /etc/nginx/ssl/localhost.wchae.key \
+    -out /etc/nginx/ssl/localhost.wchae.crt
 
 RUN chmod +x /tmp/run_nginx.sh
 ENTRYPOINT ["sh", "/tmp/run_nginx.sh"]
