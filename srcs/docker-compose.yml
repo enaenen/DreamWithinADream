@@ -3,33 +3,41 @@ version: "3"
 services: # 이 항목 밑에 실행하려는 컨테이너들 정의
 
   mariadb: # 서비스의 이름
-    container_name: db
+    container_name: mariadb
     env_file: .env
     build:
       context: requirements/mariadb
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=$$MYSQL_ROOT_PASSWORD"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=$$DB_ROOT_PASSWORD"]
       interval: 1s
       timeout: 2s
       retries: 20
       start_period: 7s
     restart: always
     volumes:
-      -db_volume:/var/lib/mysql
+      - db_volume:/var/lib/mysql
     networks:
       - inception-network
 
   wordpress:
     container_name: wordpress
+    healthcheck:
+      test: ["CMD-SHELL","nc", "-z", "localhost","9000"]
+      interval: 1s
+      timeout: 2s
+      retries: 20
+      start_period: 5s
+    restart: always
     env_file: .env
     build:
       context: requirements/wordpress
     volumes:
-     - www-v:/var/www
+     - wordpress_volume:/var/www
     networks:
       - inception-network
     depends_on:
-      - db       
+      mariadb:
+        condition: service_healthy   
 
   nginx:
     container_name: nginx
@@ -37,11 +45,12 @@ services: # 이 항목 밑에 실행하려는 컨테이너들 정의
     build:
       context: requirements/nginx
     networks:
-      - network-inception
+      - inception-network
     volumes:
-      - www-v:/var/www
+      - wordpress_volume:/var/www
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     ports:
       - 443:443
 
@@ -53,14 +62,14 @@ networks:
 volumes:
   db_volume:
     driver: local
-    driver_opts:
-      device: ${INCEPTION_PATH}/data/db
-      type: 'none'
-      o: 'bind'
+    # driver_opts:
+      # device: ${INCEPTION_PATH}/db
+      # type: 'none'
+      # o: 'bind'
 
   wordpress_volume:
     driver: local
-    driver_opts:
-      device: ${INCEPTION_PATH}/wordpress
-      type: 'none'
-      o: 'bind'
+    # driver_opts:
+      # device: ${INCEPTION_PATH}/wordpress
+      # type: 'none'
+      # o: 'bind'

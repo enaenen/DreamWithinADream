@@ -1,8 +1,7 @@
 mkdir /auth_pam_tool_dir
 touch /auth_pam_tool_dir/auth_pam_tool
 
-mysql_install_db 
-                    --user=root \
+mysql_install_db --user=root \
 					--skip-test-db \
 					--basedir=/usr \
 					--datadir=/var/lib/mysql

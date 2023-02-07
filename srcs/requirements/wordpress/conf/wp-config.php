@@ -23,10 +23,10 @@
 define( 'DB_NAME', getenv("DB_NAME") );
 
 /** Database username */
-define( 'DB_USER', getenv("DB_USER") );
+define( 'DB_USER', getenv("USER_ID") );
 
 /** Database password */
-define( 'DB_PASSWORD', getenv("DB_PASSWORD") );
+define( 'DB_PASSWORD', getenv("USER_PASSWORD") );
 
 /** Database hostname */
 define( 'DB_HOST', getenv("DB_HOST") );
