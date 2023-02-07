@@ -8,6 +8,7 @@ wp core download --allow-root --path=/var/www
 
 cp /tmp/wp-config.php /var/www
 
+
 wp core install --allow-root --path=/var/www \
 								--url=wchae.42.kr \
 								--title=Inception \

@@ -21,18 +21,12 @@ services: # 이 항목 밑에 실행하려는 컨테이너들 정의
 
   wordpress:
     container_name: wordpress
-    healthcheck:
-      test: ["CMD-SHELL","nc", "-z", "localhost","9000"]
-      interval: 1s
-      timeout: 2s
-      retries: 20
-      start_period: 5s
     restart: always
     env_file: .env
     build:
       context: requirements/wordpress
     volumes:
-     - wordpress_volume:/var/www
+      - wordpress_volume:/var/www
     networks:
       - inception-network
     depends_on:
