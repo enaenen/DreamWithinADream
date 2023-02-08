@@ -24,6 +24,9 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 sudo groupadd docker
 sudo usermod -aG docker wchae
 
+# ssh
+echo '127.0.0.1 wchae.42.kr' | sudo tee -a /etc/hosts
+
 # open ssh - server
 sudo apt install openssh-server -y
 
@@ -31,9 +34,7 @@ sudo apt install openssh-server -y
 sudo ufw 2222 allow
 sudo ufw 4242 allow
 
-echo '127.0.0.1 wchae.42.kr' | sudo tee -a /etc/hosts
 
-# ssh
 
 
 sudo reboot
