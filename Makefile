@@ -1,4 +1,4 @@
-VOLUME_DIR	:=	~/goinfre/wchae/data
+VOLUME_DIR	:=	/home/wchae/data
 DOCKER_COMPOSE	:=	docker compose
 DOCKER_COMPOSE_FILE	:=	./srcs/docker-compose.yml
 PROJECT_NAME	:=	Inception
