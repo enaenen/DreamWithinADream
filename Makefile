@@ -8,7 +8,6 @@ NETWORK_NAME := inception-network
 all:
 	@mkdir -p $(VOLUME_DIR)/db
 	@mkdir -p $(VOLUME_DIR)/wordpress
-	chmod wchae 
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up --build
 
 .PHONY:	up
