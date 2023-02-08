@@ -26,8 +26,8 @@ clean: down
 .PHONY: fclean
 
 fclean: clean
-	sudo @rm -rf $(VOLUME_DIR)/db/*
-	sudo @rm -rf $(VOLUME_DIR)/wordpress/*
+	sudo rm -rf $(VOLUME_DIR)/db/*
+	sudo rm -rf $(VOLUME_DIR)/wordpress/*
 	@docker volume rm $$(docker volume ls -q)
 
 .PHONY: re
