@@ -19,7 +19,7 @@ RUN openssl req -x509 \
     -newkey rsa:2048 \
     -days 365 \
     -nodes \
-    -subj ${CERTS_} \
+    -subj '/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=wchae' \
     -keyout /etc/nginx/ssl/localhost.wchae.key \
     -out /etc/nginx/ssl/localhost.wchae.crt
 

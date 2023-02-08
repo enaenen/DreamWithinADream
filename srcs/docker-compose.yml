@@ -56,14 +56,14 @@ networks:
 volumes:
   db_volume:
     driver: local
-    # driver_opts:
-      # device: ${INCEPTION_PATH}/db
-      # type: 'none'
-      # o: 'bind'
+    driver_opts:
+      device: ${INCEPTION_PATH}/db
+      type: 'none'
+      o: 'bind'
 
   wordpress_volume:
     driver: local
-    # driver_opts:
-      # device: ${INCEPTION_PATH}/wordpress
-      # type: 'none'
-      # o: 'bind'
+    driver_opts:
+      device: ${INCEPTION_PATH}/wordpress
+      type: 'none'
+      o: 'bind'
