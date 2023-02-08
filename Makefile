@@ -8,6 +8,7 @@ NETWORK_NAME := inception-network
 all:
 	@mkdir -p $(VOLUME_DIR)/db
 	@mkdir -p $(VOLUME_DIR)/wordpress
+	chmod wchae 
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up --build
 
 .PHONY:	up
@@ -25,9 +26,9 @@ clean: down
 .PHONY: fclean
 
 fclean: clean
-	$(SUDO) rm -rf $(VOLUME_DIR)/db/*
-	$(SUDO) rm -rf $(VOLUME_DIR)/wordpress/*
-	$(SUDO) docker volume rm $$(docker volume ls -q)
+	sudo @rm -rf $(VOLUME_DIR)/db/*
+	sudo @rm -rf $(VOLUME_DIR)/wordpress/*
+	@docker volume rm $$(docker volume ls -q)
 
 .PHONY: re
 re: fclean 
