@@ -10,7 +10,7 @@ cp /tmp/wp-config.php /var/www
 
 
 wp core install --allow-root --path=/var/www \
-								--url=wchae.42.kr \
+								--url=wchae.42.fr \
 								--title=Inception \
 								--admin_user=wchae \
 								--admin_password=4242 \
