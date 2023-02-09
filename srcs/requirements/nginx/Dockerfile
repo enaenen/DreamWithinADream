@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.16.3
 
 # copy files from host
 COPY ./tools/entry.sh /tmp/run_nginx.sh

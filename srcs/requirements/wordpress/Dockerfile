@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.16.3
 
 # need to mysql is connectable check
 HEALTHCHECK --interval=1s --timeout=2s --start-period=2s --retries=30 \
