@@ -1,7 +1,7 @@
 FROM alpine:3.16.3
 
 # need to mysql is connectable check
-HEALTHCHECK --interval=1s --timeout=2s --start-period=2s --retries=30 \
+HEALTHCHECK --interval=1s --timeout=2s --start-period=7s --retries=30 \
 	CMD wp core is-installed --allow-root --path=/var/www || exit 1
 
 RUN apk update && apk upgrade \
