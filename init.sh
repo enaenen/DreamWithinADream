@@ -25,7 +25,7 @@ sudo groupadd docker
 sudo usermod -aG docker wchae
 
 # ssh
-echo '127.0.0.1 wchae.42.kr' | sudo tee -a /etc/hosts
+echo '127.0.0.1 wchae.42.fr' | sudo tee -a /etc/hosts
 
 # open ssh - server
 sudo apt install openssh-server -y
